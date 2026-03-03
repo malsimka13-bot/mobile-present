@@ -12,7 +12,6 @@ body {
             font-family: 'Georgia', serif;
         }
 
-        /* КОНВЕРТ */
         .envelope-wrapper {
             position: relative;
             width: 300px;
@@ -26,7 +25,7 @@ body {
             height: 100%;
             background-color: #1a1a1a;
             cursor: pointer;
-            transition: transform 0.8s, opacity 0.5s;
+            transition: transform 0.8s ease-in-out, opacity 0.5s;
         }
 
         .envelope-back {
@@ -44,7 +43,7 @@ body {
             height: 100px;
             z-index: 5;
             transform-origin: top;
-            transition: transform 0.8s ease;
+            transition: transform 1.2s ease;
             transform-style: preserve-3d;
         }
 
@@ -54,6 +53,7 @@ body {
             border-right: 150px solid transparent;
             border-top: 100px solid #252525;
             backface-visibility: hidden;
+            filter: drop-shadow(0 2px 3px rgba(0,0,0,0.4));
         }
 
         .flap-back {
@@ -83,7 +83,6 @@ body {
             border-bottom: 100px solid #1d1d1d;
         }
 
-        /* ПИСЬМО */
         .letter {
             position: absolute;
             bottom: 0;
@@ -94,17 +93,18 @@ body {
             z-index: 1;
             transition: all 0.8s ease-in-out;
             padding: 20px;
+            border: 1px solid #bcbcbc;
             box-sizing: border-box;
             overflow: hidden;
             color: #1a1a1a;
+            transition-delay: 0.6s;
         }
 
         .text h2 { font-size: 18px; color: #8b0000; margin-top: 0; }
         .text p { font-size: 14px; line-height: 1.4; }
 
-        /* СОСТОЯНИЯ */
-        .envelope.open .flap { transform: rotateX(180deg); z-index: 1; }
-        .envelope.open .letter { transform: translateY(-120px); z-index: 2; }
+        .envelope.open .flap { transform: rotateX(180deg) }
+        .envelope.open .letter { transform: translateY(-120px); }
 
         .envelope.zoom .letter {
             position: fixed;
@@ -120,7 +120,6 @@ body {
             border-radius: 10px;
         }
 
-        /* КНОПКА */
         button {
             position: relative;
             z-index: 2000;
@@ -133,7 +132,6 @@ body {
             transition: 0.3s;
         }
 
-        /* ФОНОВЫЕ КАРТИНКИ */
         .images img {
             position: fixed;
             width: 150px;
@@ -145,8 +143,7 @@ body {
         .bottom-left { bottom: 10px; left: 10px; transform: rotate(-10deg); }
         .bottom-right { bottom: 10px; right: 10px; transform: rotate(10deg); }
 
-        /* АДАПТИВ ДЛЯ МОБИЛОК */
-        @media (max-width: 480px) {
+                @media (max-width: 480px) {
             .envelope-wrapper, .envelope, .flap { width: 260px; height: 170px; }
             .flap-front, .flap-back { border-left-width: 130px; border-right-width: 130px; }
             .pocket::before { border-left-width: 130px; border-right-width: 130px; border-top-width: 85px; border-bottom-width: 85px; }
@@ -155,7 +152,7 @@ body {
             .text p { font-size: 13px; }
         }
 
-        /* КОНФЕТТИ */
+      
         .confetti {
             position: fixed;
             width: 8px;
