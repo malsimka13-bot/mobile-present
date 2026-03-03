@@ -34,6 +34,7 @@ body {
             height: 100%;
             background-color: #1a1a1a;
             border-radius: 0 0 5px 5px;
+            z-index: 0;
         }
 
         .flap {
@@ -103,8 +104,8 @@ body {
         .text h2 { font-size: 18px; color: #8b0000; margin-top: 0; }
         .text p { font-size: 14px; line-height: 1.4; }
 
-        .envelope.open .flap { transform: rotateX(180deg) }
-        .envelope.open .letter { transform: translateY(-120px); }
+        .envelope.open .flap { transform: rotateX(180deg); z-index: 1;}
+        .envelope.open .letter { transform: translateY(-120px);  }
 
         .envelope.zoom .letter {
             position: fixed;
@@ -123,13 +124,14 @@ body {
         button {
             position: relative;
             z-index: 2000;
+            margin-top: 50px;
             background: #4a0404;
             color: #bcbcbc;
-            border: 3px solid #000;
+            border: none;
             padding: 15px 30px;
             cursor: pointer;
             font-size: 16px;
-            transition: 0.3s;
+            transition: 0.3s ease;
         }
 
         .images img {
