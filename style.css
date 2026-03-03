@@ -1,0 +1,169 @@
+body {
+            background-color: #2b0b0bea;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            flex-direction: column;
+            gap: 20px;
+            margin: 0;
+            perspective: 1000px;
+            overflow-x: hidden;
+            font-family: 'Georgia', serif;
+        }
+
+        /* КОНВЕРТ */
+        .envelope-wrapper {
+            position: relative;
+            width: 300px;
+            height: 200px;
+            transition: transform 0.8s ease-in-out;
+        }
+
+        .envelope {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            background-color: #1a1a1a;
+            cursor: pointer;
+            transition: transform 0.8s, opacity 0.5s;
+        }
+
+        .envelope-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-color: #1a1a1a;
+            border-radius: 0 0 5px 5px;
+        }
+
+        .flap {
+            position: absolute;
+            top: 0;
+            width: 300px;
+            height: 100px;
+            z-index: 5;
+            transform-origin: top;
+            transition: transform 0.8s ease;
+            transform-style: preserve-3d;
+        }
+
+        .flap-front {
+            position: absolute;
+            border-left: 150px solid transparent;
+            border-right: 150px solid transparent;
+            border-top: 100px solid #252525;
+            backface-visibility: hidden;
+        }
+
+        .flap-back {
+            position: absolute;
+            border-left: 150px solid transparent;
+            border-right: 150px solid transparent;
+            border-bottom: 100px solid #121212;
+            transform: rotateX(180deg);
+            backface-visibility: hidden;
+        }
+
+        .pocket {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 3;
+        }
+
+        .pocket::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            border-left: 150px solid #1a1a1a;
+            border-right: 150px solid #1a1a1a;
+            border-top: 100px solid #0f0f0f;
+            border-bottom: 100px solid #1d1d1d;
+        }
+
+        /* ПИСЬМО */
+        .letter {
+            position: absolute;
+            bottom: 0;
+            left: 5%;
+            width: 90%;
+            height: 180px;
+            background-color: #e0e0e0;
+            z-index: 1;
+            transition: all 0.8s ease-in-out;
+            padding: 20px;
+            box-sizing: border-box;
+            overflow: hidden;
+            color: #1a1a1a;
+        }
+
+        .text h2 { font-size: 18px; color: #8b0000; margin-top: 0; }
+        .text p { font-size: 14px; line-height: 1.4; }
+
+        /* СОСТОЯНИЯ */
+        .envelope.open .flap { transform: rotateX(180deg); z-index: 1; }
+        .envelope.open .letter { transform: translateY(-120px); z-index: 2; }
+
+        .envelope.zoom .letter {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 350px;
+            height: auto;
+            max-width: 90vw;
+            z-index: 1500;
+            padding: 30px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+            border-radius: 10px;
+        }
+
+        /* КНОПКА */
+        button {
+            position: relative;
+            z-index: 2000;
+            background: #4a0404;
+            color: #bcbcbc;
+            border: 3px solid #000;
+            padding: 15px 30px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: 0.3s;
+        }
+
+        /* ФОНОВЫЕ КАРТИНКИ */
+        .images img {
+            position: fixed;
+            width: 150px;
+            z-index: -1;
+            opacity: 0.6;
+        }
+        .top-left { top: 10px; left: 10px; transform: rotate(-10deg); }
+        .top-right { top: 10px; right: 10px; transform: rotate(10deg); }
+        .bottom-left { bottom: 10px; left: 10px; transform: rotate(-10deg); }
+        .bottom-right { bottom: 10px; right: 10px; transform: rotate(10deg); }
+
+        /* АДАПТИВ ДЛЯ МОБИЛОК */
+        @media (max-width: 480px) {
+            .envelope-wrapper, .envelope, .flap { width: 260px; height: 170px; }
+            .flap-front, .flap-back { border-left-width: 130px; border-right-width: 130px; }
+            .pocket::before { border-left-width: 130px; border-right-width: 130px; border-top-width: 85px; border-bottom-width: 85px; }
+            .images img { width: 80px; }
+            .text h2 { font-size: 16px; }
+            .text p { font-size: 13px; }
+        }
+
+        /* КОНФЕТТИ */
+        .confetti {
+            position: fixed;
+            width: 8px;
+            height: 8px;
+            top: -10px;
+            z-index: 1600;
+            animation: fall 3s linear forwards;
+        }
+        @keyframes fall {
+            to { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+        }
